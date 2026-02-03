@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Life Utility App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎓 Student Life Utility App</h1>
+            <p>Your all-in-one tool for grades, conversions, and budgeting</p>
+        </header>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="menu-container">
+            <div class="menu-grid">
+                <button class="menu-btn" onclick="showFeature('grade-calculator')">
+                    <span class="icon">📊</span>
+                    <h3>Grade Calculator</h3>
+                    <p>Calculate your GPA and averages</p>
+                </button>
+
+                <button class="menu-btn" onclick="showFeature('unit-converter')">
+                    <span class="icon">🔄</span>
+                    <h3>Unit Converter</h3>
+                    <p>Convert between different units</p>
+                </button>
+
+                <button class="menu-btn" onclick="showFeature('budget-helper')">
+                    <span class="icon">💰</span>
+                    <h3>Budget Helper</h3>
+                    <p>Track your spending wisely</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Grade Calculator -->
+        <div id="grade-calculator" class="feature-container hidden">
+            <button class="back-btn" onclick="showMainMenu()">← Back to Menu</button>
+            
+            <div class="feature-header">
+                <h2>📊 Grade Calculator</h2>
+                <p>Calculate your average from grades</p>
+            </div>
+
+            <div class="card">
+                <label for="num-grades">How many grades do you want to enter?</label>
+                <input type="number" id="num-grades" min="1" max="20" value="3">
+                <button onclick="generateGradeInputs()" class="primary-btn">Generate Grade Fields</button>
+            </div>
+
+            <div id="grade-inputs" class="card hidden">
+                <!-- Grade inputs will be generated here -->
+            </div>
+
+            <div id="grade-results" class="results-box hidden">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Unit Converter -->
+        <div id="unit-converter" class="feature-container hidden">
+            <button class="back-btn" onclick="showMainMenu()">← Back to Menu</button>
+            
+            <div class="feature-header">
+                <h2>🔄 Unit Converter</h2>
+                <p>Convert between different units</p>
+            </div>
+
+            <div class="converter-tabs">
+                <button class="tab-btn active" onclick="showConverterType('distance')">Distance</button>
+                <button class="tab-btn" onclick="showConverterType('temperature')">Temperature</button>
+                <button class="tab-btn" onclick="showConverterType('weight')">Weight</button>
+                <button class="tab-btn" onclick="showConverterType('time')">Time</button>
+            </div>
+
+            <!-- Distance Converter -->
+            <div id="distance-converter" class="converter-section">
+                <div class="card">
+                    <label>Conversion Type:</label>
+                    <select id="distance-type">
+                        <option value="miles-to-km">Miles → Kilometers</option>
+                        <option value="km-to-miles">Kilometers → Miles</option>
+                        <option value="feet-to-meters">Feet → Meters</option>
+                        <option value="meters-to-feet">Meters → Feet</option>
+                    </select>
+                    
+                    <label>Enter Value:</label>
+                    <input type="number" id="distance-input" step="0.01">
+                    
+                    <button onclick="convertDistance()" class="primary-btn">Convert</button>
+                    
+                    <div id="distance-result" class="conversion-result"></div>
+                </div>
+            </div>
+
+            <!-- Temperature Converter -->
+            <div id="temperature-converter" class="converter-section hidden">
+                <div class="card">
+                    <label>Conversion Type:</label>
+                    <select id="temp-type">
+                        <option value="c-to-f">Celsius → Fahrenheit</option>
+                        <option value="f-to-c">Fahrenheit → Celsius</option>
+                        <option value="c-to-k">Celsius → Kelvin</option>
+                        <option value="k-to-c">Kelvin → Celsius</option>
+                    </select>
+                    
+                    <label>Enter Value:</label>
+                    <input type="number" id="temp-input" step="0.01">
+                    
+                    <button onclick="convertTemperature()" class="primary-btn">Convert</button>
+                    
+                    <div id="temp-result" class="conversion-result"></div>
+                </div>
+            </div>
+
+            <!-- Weight Converter -->
+            <div id="weight-converter" class="converter-section hidden">
+                <div class="card">
+                    <label>Conversion Type:</label>
+                    <select id="weight-type">
+                        <option value="lbs-to-kg">Pounds → Kilograms</option>
+                        <option value="kg-to-lbs">Kilograms → Pounds</option>
+                        <option value="oz-to-g">Ounces → Grams</option>
+                        <option value="g-to-oz">Grams → Ounces</option>
+                    </select>
+                    
+                    <label>Enter Value:</label>
+                    <input type="number" id="weight-input" step="0.01">
+                    
+                    <button onclick="convertWeight()" class="primary-btn">Convert</button>
+                    
+                    <div id="weight-result" class="conversion-result"></div>
+                </div>
+            </div>
+
+            <!-- Time Converter -->
+            <div id="time-converter" class="converter-section hidden">
+                <div class="card">
+                    <label>Conversion Type:</label>
+                    <select id="time-type">
+                        <option value="hours-to-min">Hours → Minutes</option>
+                        <option value="min-to-sec">Minutes → Seconds</option>
+                        <option value="days-to-hours">Days → Hours</option>
+                        <option value="weeks-to-days">Weeks → Days</option>
+                    </select>
+                    
+                    <label>Enter Value:</label>
+                    <input type="number" id="time-input" step="0.01">
+                    
+                    <button onclick="convertTime()" class="primary-btn">Convert</button>
+                    
+                    <div id="time-result" class="conversion-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budget Helper -->
+        <div id="budget-helper" class="feature-container hidden">
+            <button class="back-btn" onclick="showMainMenu()">← Back to Menu</button>
+            
+            <div class="feature-header">
+                <h2>💰 Budget Helper</h2>
+                <p>Track your spending wisely</p>
+            </div>
+
+            <div class="card">
+                <h3>Enter Your Budget</h3>
+                
+                <label>Total Monthly Budget:</label>
+                <input type="number" id="total-budget" step="0.01" placeholder="$">
+
+                <div class="budget-grid">
+                    <div>
+                        <label>🍔 Food Budget:</label>
+                        <input type="number" id="food-budget" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>🚗 Transportation Budget:</label>
+                        <input type="number" id="trans-budget" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>🎮 Entertainment Budget:</label>
+                        <input type="number" id="ent-budget" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>📦 Other Budget:</label>
+                        <input type="number" id="other-budget" step="0.01" placeholder="$">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Enter Your Spending</h3>
+                
+                <div class="budget-grid">
+                    <div>
+                        <label>🍔 Food Spent:</label>
+                        <input type="number" id="food-spent" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>🚗 Transportation Spent:</label>
+                        <input type="number" id="trans-spent" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>🎮 Entertainment Spent:</label>
+                        <input type="number" id="ent-spent" step="0.01" placeholder="$">
+                    </div>
+                    <div>
+                        <label>📦 Other Spent:</label>
+                        <input type="number" id="other-spent" step="0.01" placeholder="$">
+                    </div>
+                </div>
+
+                <button onclick="calculateBudget()" class="primary-btn">Calculate Budget</button>
+            </div>
+
+            <div id="budget-results" class="results-box hidden">
+                <!-- Budget results will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Created by VTHS Student | Student Life Utility App © 2025</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
